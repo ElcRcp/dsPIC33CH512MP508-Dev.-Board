@@ -1,8 +1,9 @@
 [PROJECT]
-Target=E:\NUCLEO\Projeler\PIC TRYOUTS\dsPIC33CH512MP508 Dev Board\Codes\Hello World\main.hex
+Target=main.hex
 Processor_Text=DSPIC33CH512MP508
 CCSVerions=5.091
 Compiler=PCD
+CCSVersion=5.091
 [Target Data]
 FileList=main.c
 [Directories]
@@ -11,15 +12,12 @@ Include=
 Type=4
 [mru-list]
 1=main.c
-[Units]
-Count=1
-1=main (main)
 
 [fileformats]
 forcecoff=0
 
 [ProjectLog]
-Days=2
+Days=3
 D1=20-12-2019
 D1_L=2
 D1_L1=[58472]Project Opened.
@@ -28,3 +26,22 @@ D2=23-12-2019
 D2_L=2
 D2_L1=[63304]Project Opened.
 D2_L2=[64236]Project Closed.
+D3=10-02-2020
+D3_L=2
+D3_L1=[70630]Project Opened.
+D3_L2=[70674]Started Editing.
+
+[Opened Files]
+1=main.c
+t1=1
+Count=2
+2=main.h
+t2=1
+[main.c]
+Type=4
+[Units]
+Count=1
+1=main (main)
+
+[defines]
+buildcount=1
