@@ -59,9 +59,9 @@
  - PB8         : I ICSP data pin
  - PB9         : I ICSP clock pin
 
- *O : Output pin
- *I : Input pin
- *C : Communication pin
+ - *O : Output pin
+ - *I : Input pin
+ - *C : Communication pin
 
 # Jumper Sets
 
