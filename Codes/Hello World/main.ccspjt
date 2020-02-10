@@ -27,9 +27,10 @@ D2_L=2
 D2_L1=[63304]Project Opened.
 D2_L2=[64236]Project Closed.
 D3=10-02-2020
-D3_L=2
+D3_L=3
 D3_L1=[70630]Project Opened.
 D3_L2=[70674]Started Editing.
+D3_L3=[71040]Stopped Editing.
 
 [Opened Files]
 1=main.c
