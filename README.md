@@ -1,8 +1,8 @@
 # Custom Made dsPIC33CH512MP508 v0.2 Development Board 
 # Software Version 0.1
 
-Compiler: CCS C v5.091
-Schematics : Proteus 8.9
+- Compiler: CCS C v5.091
+- Schematics : Proteus 8.9
 
 # Features
 
@@ -21,14 +21,14 @@ Schematics : Proteus 8.9
 
 # Onboard Devices 
 
- Microcontroller : dsPIC33CH512MP508
- SRAM :            23K640
- EEPROM :          24LC256
- Real Time Clock : DS1338Z-33+
- Screen :          OLED 0.96" (I2C)
- Relay :           HK23F-DC5V-SHG
- USB Bridge Chip : CP2102-GMR
- USB Host Chip :   VNC2-32Q
+ - Microcontroller : dsPIC33CH512MP508
+ - SRAM :            23K640
+ - EEPROM :          24LC256
+ - Real Time Clock : DS1338Z-33+
+ - Screen :          OLED 0.96" (I2C)
+ - Relay :           HK23F-DC5V-SHG
+ - USB Bridge Chip : CP2102-GMR
+ - USB Host Chip :   VNC2-32Q
 
 # Dedicate Microcontroller Pins
 
