@@ -6,8 +6,8 @@
 void main()
 {
 
-//	init_ext_sram();
-	//init_ext_eeprom();
+	init_ext_sram();
+	init_ext_eeprom();
 
 
 	while(TRUE)
