@@ -19,7 +19,7 @@
 #define spi2_sdi PIN_C9
 #define spi2_sdo PIN_D8
 #define spi2_sck PIN_C8
-#define SRAM_CS PIN_D9
+#define sram_cs PIN_D9
 #define i2c2_sda PIN_B5
 #define i2c2_scl PIN_B6
 #define uart2_cts PIN_C5
@@ -46,18 +46,11 @@
 //#use spi(MASTER, SPI1, MODE=0, BITS=8, stream=SPI_PORT1)
 #pin_select SCK2OUT=spi2_sck
 #pin_select SDI2=spi2_sdi
+#pin_select SDO2=spi2_sdo
 #use spi(MASTER, SPI2, MODE=0, BITS=8, stream=SPI_PORT2)
 
-#use i2c(MASTER, I2C2, FAST)
+//#use i2c(MASTER, I2C1, FAST, stream=I2C_PORT1)
+#use i2c(MASTER, I2C2, FAST, stream=I2C_PORT2)
 
 #use pwm(CCP1,OUTPUT=PIN_D7,FREQUENCY=1000,DUTY=50)
 
-void mcu_setup(void)
-{
-  use_fast_io(all);
-  set_tris_a(0b11111111);
-  set_tris_b(0b1111111110111111);
-  set_tris_c(0b1011101011111111);
-  set_tris_d(0b1111110011101010);
-  set_tris_e(0b1111111100111110);
-}

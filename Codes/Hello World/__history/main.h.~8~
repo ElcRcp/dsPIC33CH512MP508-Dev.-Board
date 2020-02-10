@@ -52,12 +52,4 @@
 
 #use pwm(CCP1,OUTPUT=PIN_D7,FREQUENCY=1000,DUTY=50)
 
-void mcu_setup(void)
-{
-  use_fast_io(all);
-  set_tris_a(0b11111111);
-  set_tris_b(0b1111111110111111);
-  set_tris_c(0b1011101011111111);
-  set_tris_d(0b1111110011101010);
-  set_tris_e(0b1111111100111110);
-}
+

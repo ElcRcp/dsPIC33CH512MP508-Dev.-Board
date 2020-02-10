@@ -5,7 +5,6 @@
 
 void main()
 {
-   mcu_setup();
 
    init_ext_sram();
    init_ext_eeprom();

@@ -1,11 +1,10 @@
-#include "main.h"
-#include "sram23k640.h"
-#include "eeprom24lc256.h"
+#include <main.h>
+#include <23K256.C>
+#include <24128.C>
 
 
 void main()
 {
-   mcu_setup();
 
    init_ext_sram();
    init_ext_eeprom();
