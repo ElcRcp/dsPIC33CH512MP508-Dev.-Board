@@ -72,11 +72,11 @@ void mcu_setup(void)
   set_tris_c(0b1011101011111111);
   set_tris_d(0b1111110011101010);
   set_tris_e(0b1111111100111110);
-  SETUP_ADC_PORTS(All_DIGITAL);
-  output_bit(cp2102_rst,1)  //uart-to-usb bridge is active by default
-  output_bit(esp_en,0)  //ESP is off by default
-  output_bit(relay_ctrl,0)  //relay is not active as default
-  output_bit(SRAM_CS,0)
+  SETUP_ADC_PORTS(NO_ANALOGS);
+  output_bit(cp2102_rst,1);  //uart-to-usb bridge is active by default
+  output_bit(esp_en,0);  //ESP is off by default
+  output_bit(relay_ctrl,0);  //relay is not active as default
+  output_bit(SRAM_CS,1);
 }
 
 /*--- OLED DEFINITIONS ---*/
