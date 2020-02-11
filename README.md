@@ -72,12 +72,12 @@
 
 # Occupied I2C Addresses
 
- - 0xD0 : DS1338Z-33+ 8 bit read address
- - 0xD1 : DS1338Z-33+ 8 bit write address
- - 0xA0 : 24LC256 8 bit read address by default (remapable)
+ - 0xD0 : DS1338Z-33+ 8 bit write address
+ - 0xD1 : DS1338Z-33+ 8 bit read address
+ - 0xA0 : 24LC256 8 bit write read by default (remapable)
  - 0xA1 : 24LC256 8 bit write address by default (remapable)
- - 0x78 : 0.96" Oled Screen 8 bit read address
- - 0x79 : 0.96" Oled Screen 8 bit write address
+ - 0x78 : 0.96" Oled Screen 8 bit write address
+ - 0x79 : 0.96" Oled Screen 8 bit read address
 
 # Known Issues
 
