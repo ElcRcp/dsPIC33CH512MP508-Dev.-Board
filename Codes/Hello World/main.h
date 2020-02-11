@@ -1,10 +1,18 @@
 #include <33CH512MP508.h>
-#use delay(internal=100000000)
 
-#FUSES NOWDT                  //No Watch Dog Timer
+
+#fuses WDT_SW                 //No Watch Dog Timer, enabled in Software
 #FUSES OSCIO                  //OSC2 is general purpose output
 #FUSES CKSFSM                 //Clock Switching is enabled, fail Safe clock monitor is enabled
-#FUSES S1_CKSFSM              //Slave core Clock Switching is enabled, fail Safe clock monitor is enabled
+#fuses S1_NOIESO              //Slave core Internal External Switch Over mode disabled
+#fuses S1_SPI1PINS_PPS        //Slave core SPI1 pins can be assigned with #pin_select
+#fuses S1_WDT_SW              //Slave core No Watch Dog Timer, enabled in Software
+#fuses SPI2PINS_PPS           //SPI2 pins can be assigned with #pin_select
+#fuses NOALTI2C2              //I2C2 mapped to SDA2/SCL2 pins
+#fuses NOJTAG                 //JTAG disabled
+#fuses FRC_PLL                //Internal Fast RC oscillator with PLL
+
+#use delay(internal=100000000)
 
 #define cp2102_rst PIN_E0
 #define inp_but_1 PIN_E1
@@ -40,20 +48,20 @@
 #use rs232(UART1, baud=115200, errors, stream=UART1)
 
 #ifdef ESP_IS_ON
-	#ifndef ESP_IS_OFF
-		#pin_select U2TX=esp_rx
-		#pin_select U2RX=esp_tx
-		#use rs232(UART2, baud=115200, errors, stream=esp_com)
-	#endif
+   #ifndef ESP_IS_OFF
+      #pin_select U2TX=esp_rx
+      #pin_select U2RX=esp_tx
+      #use rs232(UART2, baud=115200, errors, stream=esp_com)
+   #endif
 #endif
 #ifdef ESP_IS_OFF
-	#ifndef ESP_IS_ON
-		#pin_select U2TX=uart2_tx
-		#pin_select U2RX=uart2_rx
-		#pin_select U2CTS=uart2_cts
-		#pin_select U2RTS=uart2_rts
-		#use rs232(UART2, baud=115200, errors, stream=UART2)
-	#endif
+   #ifndef ESP_IS_ON
+      #pin_select U2TX=uart2_tx
+      #pin_select U2RX=uart2_rx
+      #pin_select U2CTS=uart2_cts
+      #pin_select U2RTS=uart2_rts
+      #use rs232(UART2, baud=115200, errors, stream=UART2)
+   #endif
 #endif
 
 //#use spi(MASTER, SPI1, MODE=0, BITS=8, stream=SPI_PORT1)
@@ -85,4 +93,5 @@ void mcu_setup(void)
 #define S_LCDHEIGHT              64 
 #define TEXT_ONLY    //If this is defined, gives a smaller text driver only
 #define SSDADDR 0x78 //address for the chip - usually 0x7C or 0x78. 
+#define SH1106
 #include <string.h> 
