@@ -1,5 +1,4 @@
 # Custom Made dsPIC33CH512MP508 v0.2 Development Board
-# Software Version 0.1
 
 - Compiler: CCS C v5.091
 - Schematics : Proteus 8.9
@@ -85,3 +84,4 @@
  - To program VNCII chip, a jumper set from from EXT to VNC2 on UART2 jumper set will be needed.
  - UART1 is dedicated to uart-to-usb bridge chip and cannot be used by any other means
  - UART2 is shared by 3 sources and can be used by only 1 of them, wireless module, USB host and external input. USB host and external inputs are connected to same lines and can be selected via UART2 jumper set. Wireless module is connected to different lines end either UART2 can be assigned to these pins or a software uart channel can be set.
+ - OLED Screen socket is not compitable with 0.96" screen's pinout which is planned to use when designing but it is compitable with 1.3" screens.

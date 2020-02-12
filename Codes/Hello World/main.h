@@ -89,9 +89,9 @@ void mcu_setup(void)
 
 /*--- OLED DEFINITIONS ---*/
 //Display dimensions - the physical LCD
-#define S_LCDWIDTH               128 
-#define S_LCDHEIGHT              64 
+#define S_LCDWIDTH               128
+#define S_LCDHEIGHT              64
 #define TEXT_ONLY    //If this is defined, gives a smaller text driver only
-#define SSDADDR 0x78 //address for the chip - usually 0x7C or 0x78. 
-//#define SH1106
-#include <string.h> 
+#define SSDADDR 0x78 //address for the chip - usually 0x7C or 0x78.
+#define SH1106  // Used for 1.3" oled screens
+#include <string.h>
