@@ -93,5 +93,5 @@ void mcu_setup(void)
 #define S_LCDHEIGHT              64 
 #define TEXT_ONLY    //If this is defined, gives a smaller text driver only
 #define SSDADDR 0x78 //address for the chip - usually 0x7C or 0x78. 
-#define SH1106
+//#define SH1106
 #include <string.h> 
