@@ -60,13 +60,14 @@ void main()
    OLED_gotoxy(1,7);
    OLED_text(text1,strlen(text1));
 
-   fprintf(UART1,"Ready...\r\n");
+   //fprintf(UART1,"Ready...\r\n");
+
    delay_ms(1000);
    strcpy(text1,">");
    unsigned int8 line_num=0;
    while(TRUE)
    {
-      fprintf(UART1,"Heartbeat...\r\n");
+      //fprintf(UART1,"Heartbeat...\r\n");
       OLED_gotoxy(0,line_num);
    	OLED_text(text1,strlen(text1));
    	if (line_num==0)

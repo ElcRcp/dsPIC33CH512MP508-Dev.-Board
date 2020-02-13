@@ -3,14 +3,14 @@
 
 #fuses WDT_SW                 //No Watch Dog Timer, enabled in Software
 #FUSES OSCIO                  //OSC2 is general purpose output
-#FUSES CKSFSM                 //Clock Switching is enabled, fail Safe clock monitor is enabled
+
 #fuses S1_NOIESO              //Slave core Internal External Switch Over mode disabled
-#fuses S1_SPI1PINS_PPS        //Slave core SPI1 pins can be assigned with #pin_select
-#fuses S1_WDT_SW              //Slave core No Watch Dog Timer, enabled in Software
-#fuses SPI2PINS_PPS           //SPI2 pins can be assigned with #pin_select
 #fuses NOALTI2C2              //I2C2 mapped to SDA2/SCL2 pins
 #fuses NOJTAG                 //JTAG disabled
 #fuses FRC_PLL                //Internal Fast RC oscillator with PLL
+#fuses NOIESO                 //Internal External Switch Over mode disabled
+          
+
 
 #use delay(internal=100000000)
 
@@ -43,13 +43,13 @@
 #define uart1_rx PIN_D1
 #define uart1_tx PIN_D0
 
-#define ESP_IS_OFF  //define esp as on or off to select hardware uart2 connection
-
-#pin_select U1TX=uart1_tx
-#pin_select U1RX=uart1_rx
-#pin_select U1CTS=uart1_cts
-#pin_select U1RTS=uart1_rts
-#use rs232(UART1, baud=115200, errors, stream=UART1)
+//!#define ESP_IS_OFF  //define esp as on or off to select hardware uart2 connection
+//!
+//!#pin_select U1TX=uart1_tx
+//!#pin_select U1RX=uart1_rx
+//!#pin_select U1CTS=uart1_cts
+//!#pin_select U1RTS=uart1_rts
+//!#use rs232(UART1, baud=115200, errors, stream=UART1)
 //#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,SIMPLEX_MODE,parity=N,UART1,bits=8,ERRORS,stream=USB_Bridge)
 
 #ifdef ESP_IS_ON
@@ -74,7 +74,7 @@
 #pin_select SDI2=spi2_sdi
 #use spi(MASTER, SPI2, MODE=0, BITS=8, stream=SPI_PORT2)
 
-#use i2c(MASTER, I2C2, FAST)
+#use i2c(MASTER, I2C2, FAST=400000, FORCE_HW)
 
 #use fast_io(all)
 void mcu_setup(void)
