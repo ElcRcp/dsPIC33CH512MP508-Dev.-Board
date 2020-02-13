@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=6
+Days=7
 D1=20-12-2019
 D1_L=2
 D1_L1=[58472]Project Opened.
@@ -73,7 +73,7 @@ D5_L9=[64360]Project Opened.
 D5_L10=[64376]Started Editing.
 D5_L11=[65272]Stopped Editing.
 D6=13-02-2020
-D6_L=26
+D6_L=29
 D6_L1=[38296]Project Opened.
 D6_L2=[42509]Started Editing.
 D6_L3=[42978]Stopped Editing.
@@ -102,24 +102,35 @@ D6_L23=[63046]Stopped Editing.
 D6_L24=[63081]Started Editing.
 D6_L25=[63723]Stopped Editing.
 D6_L26=[64017]Project Closed.
+D6_L27=[85666]Project Opened.
+D6_L28=[85691]Started Editing.
+D6_L29=[86107]Stopped Editing.
+D7=14-02-2020
+D7_L=6
+D7_L1=[2]Started Editing.
+D7_L2=[311]Stopped Editing.
+D7_L3=[417]Started Editing.
+D7_L4=[1441]Stopped Editing.
+D7_L5=[1622]Started Editing.
+D7_L6=[2078]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=59
+t1=35
 Count=5
 2=main.h
-t2=61
+t2=35
 3=ds1338rtc.h
 t3=1
 4=ssd1306.h
 t4=1
 5=C:\Program Files (x86)\PICC\Devices\33CH512MP508.h
-t5=8
+t5=2025
 [main.c]
 Type=4
 
 [defines]
-buildcount=34
+buildcount=43
 [Units]
 Count=1
 1=main (main)

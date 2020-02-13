@@ -6,24 +6,24 @@
 
 char text1[25];        //temporary text buffer
 
-#INT_CNIE
-void joystick_input()
-{
-	switch(CNFE){
-		case 2:strcpy(text1,"M");
-			break;
-		case 4:strcpy(text1,"R");
-			break;
-		case 8:strcpy(text1,"L");
-			break;
-		case 16:strcpy(text1,"D");
-			break;
-		case 32:strcpy(text1,"U");
-			break;
-		default:delay_cycles(1);
-			break;
-	}
-}
+//!#INT_CNIE
+//!void joystick_input()
+//!{
+//!   switch(CNFE){
+//!      case 2:strcpy(text1,"M");
+//!         break;
+//!      case 4:strcpy(text1,"R");
+//!         break;
+//!      case 8:strcpy(text1,"L");
+//!         break;
+//!      case 16:strcpy(text1,"D");
+//!         break;
+//!      case 32:strcpy(text1,"U");
+//!         break;
+//!      default:delay_cycles(1);
+//!         break;
+//!   }
+//!}
 
 
 void main()
@@ -60,31 +60,41 @@ void main()
    OLED_gotoxy(1,7);
    OLED_text(text1,strlen(text1));
 
-   //fprintf(UART1,"Ready...\r\n");
+   printf("Ready...\r\n");
 
    delay_ms(1000);
    strcpy(text1,">");
    unsigned int8 line_num=0;
    while(TRUE)
    {
-      //fprintf(UART1,"Heartbeat...\r\n");
+      printf("Heartbeat...\r\n");
       OLED_gotoxy(0,line_num);
-   	OLED_text(text1,strlen(text1));
-   	if (line_num==0)
-   	{
-   		OLED_gotoxy(0,7);
-   		OLED_putc(' ');
-   	}
-   	else
-   	{
-   		OLED_gotoxy(0,line_num-1);
-   		OLED_putc(' ');
-   	}
-   	line_num++;
-   	if(line_num>7)
-   	{
-   		line_num=0;
-   	}
+      OLED_text(text1,strlen(text1));
+      if (line_num==0)
+      {
+         OLED_gotoxy(0,7);
+         OLED_putc(' ');
+      }
+      else
+      {
+         OLED_gotoxy(0,line_num-1);
+         OLED_putc(' ');
+      }
+      line_num++;
+      if(line_num>7)
+      {
+         line_num=0;
+      }
+      if(!input(inp_but_1)){
+      strcpy(text1,"M");}
+      else if(!input(inp_but_2)){
+      strcpy(text1,"R");}
+      else if(!input(inp_but_3)){
+      strcpy(text1,"L");}
+      else if(!input(inp_but_4)){
+      strcpy(text1,"D");}
+      else if(!input(inp_but_5)){
+      strcpy(text1,"U");}
       delay_ms(1000);
       //TODO: User Code
    }
