@@ -14,6 +14,10 @@
 
 #use delay(internal=100000000)
 
+#WORD CNCONE=GETENV("SFR:CNCONE")
+#WORD CNEN1E=GETENV("SFR:CNEN1E")
+#WORD CNFE=GETENV("SFR:CNFE")
+
 #define cp2102_rst PIN_E0
 #define inp_but_1 PIN_E1
 #define inp_but_2 PIN_E2
@@ -46,6 +50,7 @@
 #pin_select U1CTS=uart1_cts
 #pin_select U1RTS=uart1_rts
 #use rs232(UART1, baud=115200, errors, stream=UART1)
+//#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,SIMPLEX_MODE,parity=N,UART1,bits=8,ERRORS,stream=USB_Bridge)
 
 #ifdef ESP_IS_ON
    #ifndef ESP_IS_OFF
@@ -71,7 +76,6 @@
 
 #use i2c(MASTER, I2C2, FAST)
 
-#use pwm(CCP1,OUTPUT=PIN_D7,FREQUENCY=1000,DUTY=50)
 #use fast_io(all)
 void mcu_setup(void)
 {
@@ -85,6 +89,11 @@ void mcu_setup(void)
   output_bit(esp_en,0);  //ESP is off by default
   output_bit(relay_ctrl,0);  //relay is not active as default
   output_bit(SRAM_CS,1);
+  CNEN1E|=0b0000000000111110;
+  CNCONE|=0b1000100000000000;
+  CNFE=0;
+  enable_interrupts(INT_CNIE);
+  enable_interrupts(GLOBAL);
 }
 
 /*--- OLED DEFINITIONS ---*/

@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=5
+Days=6
 D1=20-12-2019
 D1_L=2
 D1_L1=[58472]Project Opened.
@@ -44,7 +44,7 @@ D4_L=12
 D4_L1=[229]Stopped Editing.
 D4_L2=[262]Started Editing.
 D4_L3=[559]Stopped Editing.
-TotalEdit=138
+TotalEdit=170
 TotalDebug=0
 D4_E=110
 D4_D=0
@@ -72,24 +72,44 @@ D5_L8=[10048]Project Closed.
 D5_L9=[64360]Project Opened.
 D5_L10=[64376]Started Editing.
 D5_L11=[65272]Stopped Editing.
+D6=13-02-2020
+D6_L=16
+D6_L1=[38296]Project Opened.
+D6_L2=[42509]Started Editing.
+D6_L3=[42978]Stopped Editing.
+D6_L4=[43053]Started Editing.
+D6_L5=[44318]Stopped Editing.
+D6_L6=[44441]Started Editing.
+D6_L7=[45075]Stopped Editing.
+D6_L8=[51210]Started Editing.
+D6_L9=[51511]Stopped Editing.
+D6_L10=[52776]Started Editing.
+D6_L11=[53205]Stopped Editing.
+D6_L12=[53499]Started Editing.
+D6_L13=[54106]Stopped Editing.
+D6_L14=[54631]Started Editing.
+D6_L15=[54933]Stopped Editing.
+D6_E=32
+D6_D=0
+D6_L16=[55235]Project Closed.
 
 [Opened Files]
 1=main.c
-t1=21
-Count=4
+t1=9
+Count=5
 2=main.h
-t2=49
+t2=53
 3=ds1338rtc.h
 t3=1
 4=ssd1306.h
-t4=522
-5=eeprom24lc256.h
-t5=1
+t4=1
+5=C:\Program Files (x86)\PICC\Devices\33CH512MP508.h
+t5=2210
 [main.c]
 Type=4
 
 [defines]
-buildcount=20
+buildcount=29
 [Units]
 Count=1
 1=main (main)

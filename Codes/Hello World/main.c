@@ -4,6 +4,27 @@
 #include "ssd1306.h"
 #include "ds1338rtc.h"
 
+char text1[25];        //temporary text buffer
+
+#INT_CNIE
+void joystick_input()
+{
+	switch(CNFE){
+		case 2:strcpy(text1,"M");
+			break;
+		case 4:strcpy(text1,"R");
+			break;
+		case 8:strcpy(text1,"L");
+			break;
+		case 16:strcpy(text1,"D");
+			break;
+		case 32:strcpy(text1,"U");
+			break;
+		default:delay_cycles(1);
+			break;
+	}
+}
+
 
 void main()
 {
@@ -13,7 +34,7 @@ void main()
    OLED_CLS();          //clear the physical screen
    init_ext_sram();
    init_ext_eeprom();
-   char text1[25];        //temporary text buffer 
+   
    strcpy(text1,"01234567890123456789");
    OLED_gotoxy(1,0);
    OLED_text(text1,strlen(text1));
