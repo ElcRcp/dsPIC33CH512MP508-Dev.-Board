@@ -3,16 +3,12 @@
 
 #fuses WDT_SW                 //No Watch Dog Timer, enabled in Software
 #FUSES OSCIO                  //OSC2 is general purpose output
-
-#fuses S1_NOIESO              //Slave core Internal External Switch Over mode disabled
 #fuses NOALTI2C2              //I2C2 mapped to SDA2/SCL2 pins
-#fuses NOJTAG                 //JTAG disabled
 #fuses FRC_PLL                //Internal Fast RC oscillator with PLL
-#fuses NOIESO                 //Internal External Switch Over mode disabled
           
 
 
-#use delay(internal=100000000)
+#use delay(internal=100M)
 
 #WORD CNCONE=GETENV("SFR:CNCONE")
 #WORD CNEN1E=GETENV("SFR:CNEN1E")
@@ -43,57 +39,71 @@
 #define uart1_rx PIN_D1
 #define uart1_tx PIN_D0
 
-//!#define ESP_IS_OFF  //define esp as on or off to select hardware uart2 connection
-//!
+#define ESP_IS_OFF  //define esp as on or off to select hardware uart2 connection
+
 //!#pin_select U1TX=uart1_tx
 //!#pin_select U1RX=uart1_rx
 //!#pin_select U1CTS=uart1_cts
 //!#pin_select U1RTS=uart1_rts
-//!#use rs232(UART1, baud=115200, errors, stream=UART1)
-//#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,SIMPLEX_MODE,parity=N,UART1,bits=8,ERRORS,stream=USB_Bridge)
+//!#use rs232(UART1, baud=115200, errors, stream=UART_CH1)
+//!#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH1)
 
-#ifdef ESP_IS_ON
-   #ifndef ESP_IS_OFF
-      #pin_select U2TX=esp_rx
-      #pin_select U2RX=esp_tx
-      #use rs232(UART2, baud=115200, errors, stream=esp_com)
-   #endif
-#endif
-#ifdef ESP_IS_OFF
-   #ifndef ESP_IS_ON
-      #pin_select U2TX=uart2_tx
-      #pin_select U2RX=uart2_rx
-      #pin_select U2CTS=uart2_cts
-      #pin_select U2RTS=uart2_rts
-      #use rs232(UART2, baud=115200, errors, stream=UART2)
-   #endif
-#endif
+//!#ifdef ESP_IS_ON
+//!   #ifndef ESP_IS_OFF
+//!      #pin_select U2TX=esp_rx
+//!      #pin_select U2RX=esp_tx
+//!      #use rs232(UART2, baud=9600, errors, stream=esp_com)
+//!   #endif
+//!#endif
+//!#ifdef ESP_IS_OFF
+//!   #ifndef ESP_IS_ON
+//!      #pin_select U2TX=uart2_tx
+//!      #pin_select U2RX=uart2_rx
+//!      #pin_select U2CTS=uart2_cts
+//!      #pin_select U2RTS=uart2_rts
+//!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH2)
+//!   #endif
+//!#endif
 
 //#use spi(MASTER, SPI1, MODE=0, BITS=8, stream=SPI_PORT1)
-#pin_select SCK2OUT=spi2_sck
-#pin_select SDI2=spi2_sdi
-#use spi(MASTER, SPI2, MODE=0, BITS=8, stream=SPI_PORT2)
+//!#pin_select SCK2OUT=spi2_sck
+//!#pin_select SDI2=spi2_sdi
+//!#use spi(MASTER, SPI2, MODE=0, BITS=8, stream=SPI_PORT2)
 
-#use i2c(MASTER, I2C2, FAST=400000, FORCE_HW)
+#use i2c(MASTER, I2C2, FAST=400000, FORCE_HW, NOINIT)
 
-#use fast_io(all)
+//#use fast_io(all)
 void mcu_setup(void)
 {
+  setup_wdt(WDT_OFF);
+  disable_dmt();
+  i2c_init(TRUE);
+  setup_oscillator( OSC_INTERNAL, 100000000);
+  setup_timer1(TMR_DISABLED);
+  setup_msi(MSI_SLAVE_DISABLE);
+  SETUP_ADC_PORTS(NO_ANALOGS);
+  setup_comparator_dac(COMP_COMMON_DAC_DISABLE);
+  SETUP_CURRENT_SOURCE(CURRENT_SOURCE_DISABLED);
+  setup_qei(QEI_DISABLED);
+  
   set_tris_a(0b11111111);
   set_tris_b(0b1111111110111111);
   set_tris_c(0b1011101011111111);
   set_tris_d(0b1111110011101010);
   set_tris_e(0b1111111100111110);
-  SETUP_ADC_PORTS(NO_ANALOGS);
+  
   output_bit(cp2102_rst,1);  //uart-to-usb bridge is active by default
   output_bit(esp_en,0);  //ESP is off by default
   output_bit(relay_ctrl,0);  //relay is not active as default
   output_bit(SRAM_CS,1);
-  CNEN1E|=0b0000000000111110;
-  CNCONE|=0b1000100000000000;
-  CNFE=0;
-  enable_interrupts(INT_CNIE);
-  enable_interrupts(GLOBAL);
+  
+//!  CNEN1E|=0b0000000000111110;
+//!  CNCONE|=0b1000100000000000;
+//!  CNFE=0;
+//!  clear_interrupt(INT_CNIE);
+//!  enable_interrupts(INT_CNIE);
+//!  clear_interrupt(INT_CNIE);
+//!  enable_interrupts(GLOBAL);
 }
 
 /*--- OLED DEFINITIONS ---*/
