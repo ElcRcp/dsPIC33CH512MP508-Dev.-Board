@@ -62,3 +62,8 @@ void cursor_animation(){
       line_num=0;
    }
 }
+
+#TASK(rate=1s,max=50ms,queue=5)
+void Send_Heartbeat_Uart2(){
+	fprintf(UART_CH2,"Heartbeat...\r\n");
+}
