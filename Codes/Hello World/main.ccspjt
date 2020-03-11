@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=10
+Days=12
 D1=20-12-2019
 D1_L=2
 D1_L1=[58472]Project Opened.
@@ -180,6 +180,12 @@ D10_L5=[38698]Stopped Editing.
 D10_E=4
 D10_D=0
 D10_L6=[39281]Project Closed.
+D11=11-03-2020
+D11_L=1
+D11_L1=[84074]Project Opened.
+D12=12-03-2020
+D12_L=1
+D12_L1=[1986]Project Closed.
 
 [Opened Files]
 1=main.c
