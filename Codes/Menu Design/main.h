@@ -47,33 +47,33 @@ unsigned int1 is_mid_but_pressed=0,is_right_but_pressed=0,is_left_but_pressed=0,
 unsigned int1 invert_screen_color=0;
 unsigned int8 screen_page=0;
 
-// UART1 Setup
-//!#pin_select U1TX=uart1_tx
-//!#pin_select U1RX=uart1_rx
+//!// UART1 Setup
+#pin_select U1TX=uart1_tx
+#pin_select U1RX=uart1_rx
 //!#pin_select U1CTS=uart1_cts
 //!#pin_select U1RTS=uart1_rts
-//!#use rs232(UART1, baud=115200, errors, stream=UART_CH1)
+#use rs232(UART1, baud=115200, errors, stream=UART_CH1)
 //!#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH1)
 
 
 // UART2 Setup
-//!#ifdef ESP_IS_ON
-//!   #ifndef ESP_IS_OFF
-//!      #pin_select U2TX=esp_rx
-//!      #pin_select U2RX=esp_tx
-//!      #use rs232(UART2, baud=9600, errors, stream=esp_com)
-//!   #endif
-//!#endif
-//!#ifdef ESP_IS_OFF
-//!   #ifndef ESP_IS_ON
-//!      #pin_select U2TX=uart2_tx
-//!      #pin_select U2RX=uart2_rx
-//!      #pin_select U2CTS=uart2_cts
-//!      #pin_select U2RTS=uart2_rts
+#ifdef ESP_IS_ON
+   #ifndef ESP_IS_OFF
+      #pin_select U2TX=esp_rx
+      #pin_select U2RX=esp_tx
+      #use rs232(UART2, baud=9600, errors, stream=esp_com)
+   #endif
+#endif
+#ifdef ESP_IS_OFF
+   #ifndef ESP_IS_ON
+      #pin_select U2TX=uart2_tx
+      #pin_select U2RX=uart2_rx
+      #pin_select U2CTS=uart2_cts
+      #pin_select U2RTS=uart2_rts
 //!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH2)
-//!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,parity=N,bits=8,ERRORS,stream=UART_CH2)
-//!   #endif
-//!#endif
+      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,parity=N,bits=8,ERRORS,stream=UART_CH2)
+   #endif
+#endif
 
 
 // SPI SETUP
@@ -92,7 +92,6 @@ void mcu_setup(void)
   setup_wdt(WDT_OFF);
   disable_dmt();
   i2c_init(TRUE);
-//  setup_oscillator( OSC_INTERNAL, 100000000);
   setup_timer1(TMR_DISABLED);
   setup_msi(MSI_SLAVE_DISABLE);
   SETUP_ADC_PORTS(NO_ANALOGS);
@@ -107,8 +106,8 @@ void mcu_setup(void)
   set_tris_e(0b1111111100111110);
 
   output_bit(cp2102_rst,0);
-  delay_ms(200);
-  output_bit(cp2102_rst,1);  //uart-to-usb bridge is active by default
+//!  delay_ms(200);
+//!  output_bit(cp2102_rst,1);  //uart-to-usb bridge is active by default
   output_bit(esp_en,0);  //ESP is off by default
   output_bit(relay_ctrl,0);  //relay is not active as default
   output_bit(sram_cs,1);
