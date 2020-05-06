@@ -56,7 +56,7 @@ void main()
    
    show_screen_demo();
 
-   //fprintf(UART_CH1,"Ready...\r\n");
+   fprintf(UART_CH1,"Ready...\r\n");
 
    delay_ms(1000);
    strcpy(text1,">");

@@ -48,51 +48,51 @@ unsigned int1 invert_screen_color=0;
 unsigned int8 screen_page=0;
 
 // UART1 Setup
-#pin_select U1TX=uart1_tx
-#pin_select U1RX=uart1_rx
-#pin_select U1CTS=uart1_cts
-#pin_select U1RTS=uart1_rts
-#use rs232(UART1, baud=115200, errors, stream=UART_CH1)
+//!#pin_select U1TX=uart1_tx
+//!#pin_select U1RX=uart1_rx
+//!#pin_select U1CTS=uart1_cts
+//!#pin_select U1RTS=uart1_rts
+//!#use rs232(UART1, baud=115200, errors, stream=UART_CH1)
 //!#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH1)
 
 
 // UART2 Setup
-#ifdef ESP_IS_ON
-   #ifndef ESP_IS_OFF
-      #pin_select U2TX=esp_rx
-      #pin_select U2RX=esp_tx
-      #use rs232(UART2, baud=9600, errors, stream=esp_com)
-   #endif
-#endif
-#ifdef ESP_IS_OFF
-   #ifndef ESP_IS_ON
-      #pin_select U2TX=uart2_tx
-      #pin_select U2RX=uart2_rx
-      #pin_select U2CTS=uart2_cts
-      #pin_select U2RTS=uart2_rts
+//!#ifdef ESP_IS_ON
+//!   #ifndef ESP_IS_OFF
+//!      #pin_select U2TX=esp_rx
+//!      #pin_select U2RX=esp_tx
+//!      #use rs232(UART2, baud=9600, errors, stream=esp_com)
+//!   #endif
+//!#endif
+//!#ifdef ESP_IS_OFF
+//!   #ifndef ESP_IS_ON
+//!      #pin_select U2TX=uart2_tx
+//!      #pin_select U2RX=uart2_rx
+//!      #pin_select U2CTS=uart2_cts
+//!      #pin_select U2RTS=uart2_rts
 //!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH2)
-      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,parity=N,bits=8,ERRORS,stream=UART_CH2)
-   #endif
-#endif
+//!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,parity=N,bits=8,ERRORS,stream=UART_CH2)
+//!   #endif
+//!#endif
 
 
 // SPI SETUP
 //#use spi(MASTER, SPI1, MODE=0, BITS=8, stream=SPI_PORT1)
-#pin_select SCK2OUT=spi2_sck
-#pin_select SDI2=spi2_sdi
-#use spi(MASTER, SPI2, MODE=0, BITS=8, BAUD=1000000, FORCE_HW, stream=SPI_PORT2)
+//!#pin_select SCK2OUT=spi2_sck
+//!#pin_select SDI2=spi2_sdi
+//!#use spi(MASTER, SPI2, MODE=0, BITS=8, BAUD=1000000, FORCE_HW, stream=SPI_PORT2)
 
 
 // I2C SETUP
 #use i2c(MASTER, I2C2, FAST=400000, FORCE_HW, NOINIT)
 
-//#use fast_io(all)
+#use fast_io(all)
 void mcu_setup(void)
 {
   setup_wdt(WDT_OFF);
   disable_dmt();
   i2c_init(TRUE);
-  setup_oscillator( OSC_INTERNAL, 100000000);
+//  setup_oscillator( OSC_INTERNAL, 100000000);
   setup_timer1(TMR_DISABLED);
   setup_msi(MSI_SLAVE_DISABLE);
   SETUP_ADC_PORTS(NO_ANALOGS);
@@ -130,3 +130,12 @@ void mcu_setup(void)
 #define SSDADDR 0x78 //address for the chip - usually 0x7C or 0x78.
 #define SH1106  // Used for 1.3" oled screens
 #include <string.h>
+
+void clear_buttons()
+{
+   is_mid_but_pressed=0;
+   is_right_but_pressed=0;
+   is_left_but_pressed=0;
+   is_down_but_pressed=0;
+   is_up_but_pressed=0;
+}
