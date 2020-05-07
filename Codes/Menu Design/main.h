@@ -1,18 +1,11 @@
 #include <33CH512MP508.h>
 
-
 #fuses WDT_SW                 //No Watch Dog Timer, enabled in Software
 #FUSES OSCIO                  //OSC2 is general purpose output
 #fuses NOALTI2C2              //I2C2 mapped to SDA2/SCL2 pins
 #fuses FRC_PLL                //Internal Fast RC oscillator with PLL
 
-
-
 #use delay(internal=100M)
-
-#WORD CNCONE=GETENV("SFR:CNCONE")
-#WORD CNEN1E=GETENV("SFR:CNEN1E")
-#WORD CNFE=GETENV("SFR:CNFE")
 
 #define cp2102_rst PIN_E0
 #define inp_but_1 PIN_E1
@@ -39,15 +32,15 @@
 #define uart1_rx PIN_D1
 #define uart1_tx PIN_D0
 
-#define ESP_IS_OFF  //define esp as on or off to select hardware uart2 connection
-
-
 // GLOBAL VARIABLES
 unsigned int1 is_mid_but_pressed=0,is_right_but_pressed=0,is_left_but_pressed=0,is_down_but_pressed=0,is_up_but_pressed=0;
 unsigned int1 invert_screen_color=0;
 unsigned int8 screen_page=0;
+unsigned int8 timeSetHour=12,timeSetMinute=30,timeSetSeconds=30,dateSetDay=15,dateSetMonth=6,dateSetYearLow=0,dateSetYearHigh=0;
+unsigned int16 dateSetYear=0;
 
-//!// UART1 Setup
+
+// UART1 Setup
 #pin_select U1TX=uart1_tx
 #pin_select U1RX=uart1_rx
 //!#pin_select U1CTS=uart1_cts
@@ -57,30 +50,18 @@ unsigned int8 screen_page=0;
 
 
 // UART2 Setup
-#ifdef ESP_IS_ON
-   #ifndef ESP_IS_OFF
-      #pin_select U2TX=esp_rx
-      #pin_select U2RX=esp_tx
-      #use rs232(UART2, baud=9600, errors, stream=esp_com)
-   #endif
-#endif
-#ifdef ESP_IS_OFF
-   #ifndef ESP_IS_ON
-      #pin_select U2TX=uart2_tx
-      #pin_select U2RX=uart2_rx
-      #pin_select U2CTS=uart2_cts
-      #pin_select U2RTS=uart2_rts
+#pin_select U2TX=uart2_tx
+#pin_select U2RX=uart2_rx
+#pin_select U2CTS=uart2_cts
+#pin_select U2RTS=uart2_rts
 //!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH2)
-      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,parity=N,bits=8,ERRORS,stream=UART_CH2)
-   #endif
-#endif
+#use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,parity=N,bits=8,ERRORS,stream=UART_CH2)
 
 
 // SPI SETUP
-//#use spi(MASTER, SPI1, MODE=0, BITS=8, stream=SPI_PORT1)
-//!#pin_select SCK2OUT=spi2_sck
-//!#pin_select SDI2=spi2_sdi
-//!#use spi(MASTER, SPI2, MODE=0, BITS=8, BAUD=1000000, FORCE_HW, stream=SPI_PORT2)
+#pin_select SCK2OUT=spi2_sck
+#pin_select SDI2=spi2_sdi
+#use spi(MASTER, SPI2, MODE=0, BITS=8, BAUD=1000000, FORCE_HW, stream=SPI_PORT2)
 
 
 // I2C SETUP
@@ -106,19 +87,10 @@ void mcu_setup(void)
   set_tris_e(0b1111111100111110);
 
   output_bit(cp2102_rst,0);
-//!  delay_ms(200);
-//!  output_bit(cp2102_rst,1);  //uart-to-usb bridge is active by default
   output_bit(esp_en,0);  //ESP is off by default
   output_bit(relay_ctrl,0);  //relay is not active as default
   output_bit(sram_cs,1);
 
-//!  CNEN1E|=0b0000000000111110;
-//!  CNCONE|=0b1000100000000000;
-//!  CNFE=0;
-//!  clear_interrupt(INT_CNIE);
-//!  enable_interrupts(INT_CNIE);
-//!  clear_interrupt(INT_CNIE);
-//!  enable_interrupts(GLOBAL);
 }
 
 /*--- OLED DEFINITIONS ---*/
