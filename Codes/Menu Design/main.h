@@ -1,4 +1,6 @@
 #include <33CH512MP508.h>
+#include <stdio.h>
+#include <string.h>
 
 #fuses WDT_SW                 //No Watch Dog Timer, enabled in Software
 #FUSES OSCIO                  //OSC2 is general purpose output

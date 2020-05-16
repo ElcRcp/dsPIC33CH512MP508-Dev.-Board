@@ -10,21 +10,23 @@ void show_screen_demo(void);
 
 #include "rtos_tasks.h"
 
+
 void main()
 {
+   delay_ms(500);
    mcu_setup();
    size=NORMAL;         //specify font size
-   ssd_init();          //Start oled screen (called from include file)
+   OLED_commands(init_sequence,sizeof(init_sequence));          //Start oled screen (called from include file)
    delay_ms(100);       //give oled some time to wake
    OLED_CLS();          //clear the physical screen
    
    init_ext_sram();
-   init_ext_eeprom();
-
 
    fprintf(UART_CH2,"Ready...\r\n");
-
-   delay_ms(1000);
+   
+   delay_ms(500);  
+   print_dev_info();
+   
    rtos_run();
    while(TRUE)
    {

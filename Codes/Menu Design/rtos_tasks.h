@@ -399,6 +399,7 @@ void Screen_Handler(){
 
 #TASK(rate=1s,max=50ms,queue=5)
 void Send_Heartbeat(){
-   fprintf(UART_CH2,"Heartbeat...\r\n");
+   static unsigned int16 hb_ct=0;
+   fprintf(UART_CH2,"%Lu Heartbeat...\r\n",hb_ct++);
    fprintf(UART_CH1,"Heartbeat...\r\n");
 }
