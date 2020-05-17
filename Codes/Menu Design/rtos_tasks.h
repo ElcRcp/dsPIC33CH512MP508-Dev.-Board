@@ -242,7 +242,7 @@ void Screen_Handler(){
       clear_buttons();
    }
    else if(screen_page==4){
-   static int8 setTimeRowSelect=4;
+      static int8 setTimeRowSelect=4;
       if(is_down_but_pressed){
          if(line_select==5){
             line_select=5;
@@ -380,11 +380,32 @@ void Screen_Handler(){
       }
       OLED_gotoxy(col_select,line_select);
       OLED_putc("->");
-
+      
+      OLED_gotoxy(2,0);
+      OLED_putc("Turn ESP ");
+      if(esp_status==0){
+         OLED_putc("ON");
+      }else if(esp_status==1){
+         OLED_putc("OFF");
+      }
+      
+      OLED_gotoxy(2,1);
+      if(esp_bridge_flag==0){
+         OLED_putc("Conn.");
+      }else if(esp_bridge_flag==1){
+         OLED_putc("Dconn.");
+      }
+      OLED_putc(" ESP & UART2");
+      
       OLED_gotoxy(2,6);
       OLED_putc("Cancel");
       if(is_mid_but_pressed){
          switch(line_select){
+         case 0:output_toggle(esp_en);
+               esp_status=~esp_status;
+               break;
+         case 1:esp_bridge_flag=~esp_bridge_flag;
+               break;      
          case 6:screen_page=2;
                line_select=0;
                col_select=0;
@@ -397,9 +418,25 @@ void Screen_Handler(){
    }
 }
 
-#TASK(rate=1s,max=50ms,queue=5)
-void Send_Heartbeat(){
-   static unsigned int16 hb_ct=0;
-   fprintf(UART_CH2,"%Lu Heartbeat...\r\n",hb_ct++);
-   fprintf(UART_CH1,"Heartbeat...\r\n");
-}
+//!#TASK(rate=1s,max=50ms,queue=5)
+//!void Send_Heartbeat(){
+//!   static unsigned int16 hb_ct=0;
+//!   fprintf(UART_CH2,"%Lu Heartbeat...\r\n",hb_ct++);
+//!   fprintf(UART_CH1,"Heartbeat...\r\n");
+//!}
+
+//!#TASK(rate=1s,max=50ms,queue=5)
+//!void Manage_Uarts()
+//!{
+//!   if(uart_1_rcv_flg==1)
+//!   {
+//!      fprintf(UART_CH2,"%c",Uart1RcvBuff);
+//!      uart_1_rcv_flg=0;
+//!   }
+//!   if(uart_2_rcv_flg==1)
+//!   {
+//!      //fprintf(UART_CH1,"%c\n",Uart2RcvBuff);
+//!      fprintf(UART_CH2,"%c",Uart2RcvBuff);
+//!      uart_2_rcv_flg=0;
+//!   }
+//!}

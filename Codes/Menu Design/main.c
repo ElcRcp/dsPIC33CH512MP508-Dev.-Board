@@ -3,6 +3,7 @@
 #include "eeprom24lc256.h"
 #include "ssd1306.h"
 #include "ds1338rtc.h"
+#include "uart_include.h"
 
 void show_time_oled(int8 column, int8 row);
 void show_date_oled(int8 column, int8 row);
@@ -28,6 +29,7 @@ void main()
    print_dev_info();
    
    rtos_run();
+   
    while(TRUE)
    {
       delay_us(1);
