@@ -43,11 +43,15 @@ unsigned int16 dateSetYear=0;
 
 
 // UART1 Setup
-#pin_select U1TX=esp_rx
-#pin_select U1RX=esp_tx
+//!#pin_select U1TX=esp_rx
+//!#pin_select U1RX=esp_tx
+//!#use rs232(baud=115200,RCV=esp_tx,XMIT=esp_rx,parity=N,bits=8,ERRORS,stream=UART_CH1)
+
 //!#pin_select U1CTS=uart1_cts
 //!#pin_select U1RTS=uart1_rts
-#use rs232(baud=115200,RCV=esp_tx,XMIT=esp_rx,parity=N,bits=8,ERRORS,stream=UART_CH1)
+#pin_select U1TX=uart1_tx
+#pin_select U1RX=uart1_rx
+#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,parity=N,bits=8,ERRORS,stream=UART_CH1)
 //!#use rs232(baud=115200,RCV=uart1_rx,XMIT=uart1_tx,CTS=uart1_cts,RTS=uart1_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH1)
 
 
@@ -56,7 +60,7 @@ unsigned int16 dateSetYear=0;
 #pin_select U2RX=uart2_rx
 #pin_select U2CTS=uart2_cts
 #pin_select U2RTS=uart2_rts
-//!      #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH2)
+//!#use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,CTS=uart2_cts,RTS=uart2_rts,FLOW_CONTROL_MODE,parity=N,bits=8,ERRORS,stream=UART_CH2)
 #use rs232(baud=115200,RCV=uart2_rx,XMIT=uart2_tx,parity=N,bits=8,ERRORS,stream=UART_CH2)
 
 
@@ -88,7 +92,7 @@ void mcu_setup(void)
   set_tris_d(0b1111110011101010);
   set_tris_e(0b1111111100111110);
 
-  output_bit(cp2102_rst,0);
+  output_bit(cp2102_rst,1);
   output_bit(esp_en,0);  //ESP is off by default
   output_bit(relay_ctrl,0);  //relay is not active as default
   output_bit(sram_cs,1);
